@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content Lab · Партнёрство · 18.03.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#eef2f9;
+  --glass-bg:rgba(255,255,255,0.72);
+  --glass-border:rgba(255,255,255,0.85);
+  --glass-shadow:rgba(100,120,180,0.08);
+  --text-primary:#1a2138;
+  --text-secondary:#4a5578;
+  --text-muted:#8892ab;
+  --accent:#4f7cff;
+  --accent-light:#e8eeff;
+  --accent-dim:rgba(79,124,255,0.1);
+  --warn:#f5944e;
+  --warn-light:#fff3e8;
+  --success:#2dba8e;
+  --success-light:#e5f8f2;
+  --idea:#a87bff;
+  --idea-light:#f2ecff;
+  --mind:#e85d9c;
+  --mind-light:#fde8f2;
+  --radius:16px;
+  --radius-sm:12px;
+  --p1:#e91e8c;--p2:#2196f3;--p3:#4caf50;--p4:#ff9800;
+}
+body{
+  font-family:'DM Sans',sans-serif;
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(circle at 15% 20%,rgba(79,124,255,0.12) 0%,transparent 60%),
+    radial-gradient(circle at 85% 80%,rgba(168,123,255,0.10) 0%,transparent 60%);
+  background-attachment:fixed;
+  min-height:100vh;
+  color:var(--text-primary);
+  line-height:1.6;
+}
+.container{max-width:780px;margin:0 auto;padding:48px 32px 100px}
+@media(max-width:1023px){.container{max-width:720px;padding:32px 20px 80px}}
+@media(max-width:639px){.container{padding:16px 12px 48px}}
+
+/* HEADER */
+.header{
+  background:var(--glass-bg);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius);
+  box-shadow:0 8px 32px var(--glass-shadow),0 0 0 1px rgba(255,255,255,0.5) inset;
+  padding:32px;margin-bottom:16px;
+  position:relative;overflow:hidden;
+  animation:fadeSlideIn 0.5s ease both;
+}
+.header::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,#4f7cff,#a87bff,#e85d9c);
+  border-radius:4px 4px 0 0;
+}
+.nlc-logo-bar{display:inline-flex;align-items:center;gap:8px;padding:8px;background:rgba(224,229,236,0.6);border-radius:20px;margin-bottom:16px}
+.nlc-tile{background:#eef0f3;border-radius:14px;padding:10px 18px;box-shadow:5px 5px 10px rgba(163,177,198,0.6),-4px -4px 8px rgba(255,255,255,0.9)}
+.nlc-tile span{font-family:'Nunito',sans-serif;font-weight:900;font-size:22px}
+.nlc-next{color:#E91E8C}.nlc-level{color:#2196F3}.nlc-club{color:#4CAF50}
+.arrow-tile svg{display:block}
+@media(max-width:639px){.nlc-tile{padding:7px 12px}.nlc-tile span{font-size:16px}}
+.header-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--text-muted);margin-bottom:10px;
+}
+.header h1{
+  font-size:clamp(20px,4vw,28px);font-weight:700;
+  color:var(--text-primary);margin-bottom:12px;line-height:1.3;
+}
+.header-summary{
+  font-size:14px;color:var(--text-secondary);
+  line-height:1.7;margin-bottom:20px;
+}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.meta-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--accent-dim);
+  border:1px solid rgba(79,124,255,0.2);
+  border-radius:20px;padding:5px 12px;
+  font-size:12px;font-weight:500;color:var(--accent);
+}
+.meta-chip svg{width:13px;height:13px;flex-shrink:0}
+.participants-toggle{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent-dim);border:1px solid rgba(79,124,255,0.2);
+  border-radius:20px;padding:6px 14px;
+  font-size:12px;font-weight:600;color:var(--accent);
+  cursor:pointer;transition:background .2s;
+}
+.participants-toggle:hover{background:rgba(79,124,255,0.16)}
+.participants-toggle svg{width:14px;height:14px}
+.participants-toggle .count{background:var(--accent);color:#fff;border-radius:10px;padding:1px 7px;font-size:11px}
+.participants-body{display:flex;flex-wrap:wrap;gap:8px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;padding-top:0}
+.participants-body.open{max-height:200px;padding-top:12px}
+.participant-tag{display:inline-flex;align-items:center;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:20px;padding:5px 14px;font-size:13px;font-weight:500;color:var(--text-secondary)}
+
+/* SECTION */
+.section{
+  background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:var(--radius);
+  box-shadow:0 4px 16px var(--glass-shadow);
+  margin-bottom:10px;overflow:hidden;
+  animation:fadeSlideIn .5s .08s ease both;
+}
+.section-toggle{
+  width:100%;display:flex;align-items:center;gap:14px;
+  padding:18px 20px;background:none;border:none;
+  cursor:pointer;text-align:left;transition:background .2s;
+}
+.section-toggle:hover{background:rgba(79,124,255,0.04)}
+.section-icon{
+  width:38px;height:38px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.section-icon.blue{background:var(--accent-light);color:var(--accent)}
+.section-icon.pink{background:var(--mind-light);color:var(--mind)}
+.section-icon.orange{background:var(--warn-light);color:var(--warn)}
+.section-icon.green{background:var(--success-light);color:var(--success)}
+.section-icon.purple{background:var(--idea-light);color:var(--idea)}
+.section-icon svg{width:18px;height:18px}
+.section-label{flex:1;min-width:0}
+.section-label .num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--text-muted);letter-spacing:1px;display:block;margin-bottom:2px}
+.section-label .title{display:block;font-size:15px;font-weight:600;color:var(--text-primary);margin-bottom:3px}
+.section-label .brief{display:block;font-size:12px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chevron{width:16px;height:16px;flex-shrink:0;color:var(--text-muted);transition:transform .3s}
+.section-toggle[aria-expanded="true"] .chevron{transform:rotate(180deg)}
+.section-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.section-body.open{max-height:9000px}
+.section-body-inner{padding:0 20px 20px}
+.discussion-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(79,124,255,0.1)}
+
+/* ITEMS */
+.item{margin-bottom:6px;border-radius:var(--radius-sm);overflow:hidden}
+.item-toggle{
+  width:100%;display:flex;align-items:flex-start;gap:10px;
+  padding:12px 14px;background:rgba(255,255,255,0.4);
+  border:1px solid rgba(255,255,255,0.6);border-radius:var(--radius-sm);
+  cursor:pointer;text-align:left;transition:background .2s;
+}
+.item-toggle:hover{background:rgba(255,255,255,0.65)}
+.item-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.item-dot.blue{background:var(--accent)}
+.item-dot.pink{background:var(--mind)}
+.item-dot.orange{background:var(--warn)}
+.item-dot.green{background:var(--success)}
+.item-dot.purple{background:var(--idea)}
+.item-summary{flex:1;font-size:13px;font-weight:600;color:var(--text-primary);line-height:1.5}
+.item-expand-icon{width:14px;height:14px;flex-shrink:0;color:var(--text-muted);margin-top:2px;transition:transform .25s}
+.item-toggle[aria-expanded="true"] .item-expand-icon{transform:rotate(180deg)}
+.item-detail{
+  max-height:0;overflow:hidden;transition:max-height .35s ease;
+  background:rgba(255,255,255,0.25);
+  border:1px solid rgba(255,255,255,0.5);
+  border-top:none;border-radius:0 0 var(--radius-sm) var(--radius-sm);
+  padding:0 14px;
+}
+.item-detail.open{max-height:2000px;padding:12px 14px 14px}
+.item-detail p{font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:8px}
+.item-detail p:last-child{margin-bottom:0}
+.quote{font-style:italic;color:var(--text-secondary);border-left:3px solid var(--accent);padding-left:12px;margin:10px 0;font-size:13px;line-height:1.65}
+.quote-author{font-style:normal;font-size:11px;color:var(--text-muted);font-weight:600}
+
+/* TASKS */
+.block{
+  background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid var(--glass-border);border-radius:var(--radius);
+  box-shadow:0 4px 16px var(--glass-shadow);
+  margin-bottom:10px;overflow:hidden;
+  animation:fadeSlideIn .5s .14s ease both;
+}
+.block-header{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid rgba(79,124,255,0.08)}
+.block-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--accent-light);color:var(--accent)}
+.block-icon svg{width:16px;height:16px}
+.block-title{font-size:14px;font-weight:700;color:var(--text-primary)}
+.block-body{padding:16px 20px}
+.owner-group{margin-bottom:18px}
+.owner-group:last-child{margin-bottom:0}
+.owner-group-title{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.task-owner-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.owner-group-title span:last-child{font-size:12px;font-weight:700;letter-spacing:.3px}
+.task-list-items{list-style:none;padding:0;margin:0}
+.task-list-items li{display:flex;align-items:baseline;gap:10px;padding:9px 12px;background:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.7);border-radius:8px;margin-bottom:6px}
+.task-list-items li:last-child{margin-bottom:0}
+.task-list-items li::before{content:'—';color:var(--text-muted);flex-shrink:0}
+.task-li-text{flex:1;font-size:13px;color:var(--text-primary);line-height:1.5}
+.task-li-deadline{font-size:11px;color:var(--text-muted);white-space:nowrap;flex-shrink:0}
+
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="nlc-logo-bar">
+      <div class="nlc-tile"><span class="nlc-next">NEXT</span></div>
+      <div class="nlc-tile"><span class="nlc-level">LEVEL</span></div>
+      <div class="nlc-tile"><span class="nlc-club">CLUB</span></div>
+      <div class="nlc-tile arrow-tile">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <polygon points="3 11 22 2 13 21 11 13 3 11" fill="#FF9800"/>
+        </svg>
+      </div>
+    </div>
+    <div class="header-label">Привилегия · Стратегия партнёрства</div>
+    <h1>Content Lab — Обсуждение партнёрства</h1>
+    <div class="header-summary">
+      Александр и Юлия договорились создать совместное направление Content Lab — лабораторию контента на базе Avocado Production. Распределили роли, договорились о базовой финансовой модели 50/50 и определили следующие шаги по подключению Насти как ключевого исполнителя.
+    </div>
+    <div class="meta-row">
+      <span class="meta-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        18 марта 2026
+      </span>
+      <span class="meta-chip">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        Zoom
+      </span>
+    </div>
+    <button class="participants-toggle" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Участники <span class="count">2</span>
+    </button>
+    <div class="participants-body">
+      <span class="participant-tag">Александр Погорелый</span>
+      <span class="participant-tag">Юлия Торжинская</span>
+    </div>
+  </div>
+
+  <!-- SECTION 01 -->
+  <div class="section">
+    <button class="section-toggle" aria-expanded="false">
+      <div class="section-icon blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="section-label">
+        <span class="num">01</span>
+        <span class="title">Обсуждение партнёрства</span>
+        <span class="brief">Content Lab — концепция, роли, деньги, следующие шаги</span>
+      </div>
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="section-body">
+      <div class="section-body-inner">
+        <span class="discussion-label">Обсуждение</span>
+
+        <div class="item">
+          <button class="item-toggle" aria-expanded="false">
+            <div class="item-dot blue"></div>
+            <div class="item-summary">Что такое Content Lab и откуда идея</div>
+            <svg class="item-expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="item-detail">
+            <p>Юлия пришла с запросом: у неё есть входящий поток запросов на монтаж (под каждым рилсом — вопросы «как вы делаете такой монтаж?»), и она хочет монетизировать этот спрос. Её Instagram уже работает как мощная лидогенерация на услугу монтажа.</p>
+            <p>Александр предложил не встраивать это в Content Club, а выделить в отдельное направление — Content Lab («лаборатория контента»). Логика: Lab и Club слишком созвучны, но важнее — это принципиально другой продукт. Отдельная страница в Instagram с портфолио кейсов, своя воронка, свой бренд.</p>
+            <p>Текущий потенциал направления: ~$12 000/месяц входящий поток, $2 000–$4 000 чистыми — с перспективой роста.</p>
+            <p class="quote">«Если в шапочке профиля появляется Content Lab, и уже ведётся воронка на ключевое контактное лицо, которое продаёт пакетами монтаж — это может быть вечный двигатель.» <span class="quote-author">— Юлия</span></p>
+          </div>
+        </div>
+
+        <div class="item">
+          <button class="item-toggle" aria-expanded="false">
+            <div class="item-dot pink"></div>
+            <div class="item-summary">Структура и позиционирование</div>
+            <svg class="item-expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="item-detail">
+            <p>Юлия предложила позиционировать Content Lab как дочернее предприятие Avocado Production — ей удобнее маркетингово. Александр взял паузу: иногда клиентам лучше видеть раздельные бренды для контрагентов. Решение по позиционированию — отложено на финализацию структуры.</p>
+            <p>Принципиально решено: Content Lab — совместное направление услуг Александра и Юлии. Не просто исполнитель/заказчик, а полноценное партнёрство с разделёнными зонами ответственности.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <button class="item-toggle" aria-expanded="false">
+            <div class="item-dot orange"></div>
+            <div class="item-summary">Роли: кто за что отвечает</div>
+            <svg class="item-expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="item-detail">
+            <p><strong>Александр</strong> — система управления, back-office, автоматизация процессов. Отвечает за менеджеров и автоматизаторов (административное подчинение): кто работает, за какие деньги, сколько клиентов, что и когда делать.</p>
+            <p><strong>Юлия</strong> — лидогенерация через свой Instagram и нетворк, поиск и привлечение исполнителей, которые будут делать саму услугу монтажа.</p>
+            <p><strong>Настя</strong> — функциональное управление качеством: обучает новых монтажёров, курирует исполнение, устанавливает стандарты. Настя остаётся в Avocado Production, но ведёт это направление как мастер.</p>
+            <p><strong>Влада Абрамова</strong> — на переходный период закрывает административное управление направлением со стороны Avocado Production.</p>
+            <p class="quote">«Административное и функциональное подчинение разделяем. Мы обеспечиваем административное. Как это делать — остаётся за Настей.» <span class="quote-author">— Александр</span></p>
+          </div>
+        </div>
+
+        <div class="item">
+          <button class="item-toggle" aria-expanded="false">
+            <div class="item-dot green"></div>
+            <div class="item-summary">Финансовая модель — договорились о базе</div>
+            <svg class="item-expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="item-detail">
+            <p>Юлия предложила 50/50 как базу. Александр принял за основу, подтвердил гибкость в переговорах.</p>
+            <p>Важное уточнение от Александра: в партнёрстве разделяются три типа долей — <strong>доли в компаниях</strong> (небольшой % у Юлии в Avocado Production), <strong>доли в направлениях</strong> (Content Lab — 50/50), <strong>доли в продуктах</strong> (отдельно по каждому). Это гибкая система, которая учитывает реальный вклад каждого.</p>
+            <p>Каждый из партнёров может при необходимости уступить часть своей доли в направлении кому-то из команды — если посчитают нужным.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <button class="item-toggle" aria-expanded="false">
+            <div class="item-dot purple"></div>
+            <div class="item-summary">Следующие шаги — что решили сделать</div>
+            <svg class="item-expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="item-detail">
+            <p>Александр берёт на себя финализацию структуры и отправляет Юлии к вечеру того же дня. Не просто протокол, а документ-структура для повторного согласования.</p>
+            <p>После согласования — совместный звонок с Настей. До звонка Юлия «подогревает» Настю: сообщает, что нашла способ её масштабировать, без деталей по структуре.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TASKS -->
+  <div class="block">
+    <div class="block-header">
+      <div class="block-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      </div>
+      <div class="block-title">Задачи</div>
+    </div>
+    <div class="block-body">
+
+      <div class="owner-group">
+        <div class="owner-group-title">
+          <span class="task-owner-dot" style="background:var(--p1);box-shadow:0 0 8px var(--p1)"></span>
+          <span style="color:var(--p1)">Александр Погорелый</span>
+        </div>
+        <ul class="task-list-items">
+          <li>
+            <span class="task-li-text">Подготовить и отправить Юлии финализированную структуру Content Lab — документ с ролями, долями и позиционированием для повторного согласования</span>
+            <span class="task-li-deadline">🔴 18.03 вечер</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="owner-group">
+        <div class="owner-group-title">
+          <span class="task-owner-dot" style="background:var(--p2);box-shadow:0 0 8px var(--p2)"></span>
+          <span style="color:var(--p2)">Юлия Торжинская</span>
+        </div>
+        <ul class="task-list-items">
+          <li>
+            <span class="task-li-text">Подогреть Настю до общего звонка — сообщить, что есть способ её масштабировать, заинтересовать без раскрытия деталей структуры</span>
+            <span class="task-li-deadline">🔴 18.03</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="owner-group">
+        <div class="owner-group-title">
+          <span class="task-owner-dot" style="background:var(--p3);box-shadow:0 0 8px var(--p3)"></span>
+          <span style="color:var(--p3)">Команда</span>
+        </div>
+        <ul class="task-list-items">
+          <li>
+            <span class="task-li-text">Провести совместный звонок Александр + Юлия + Настя — знакомство и презентация идеи Content Lab</span>
+            <span class="task-li-deadline">🔴 19.03</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const pToggle = document.querySelector('.participants-toggle');
+  if (pToggle) {
+    pToggle.addEventListener('click', function() {
+      const exp = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!exp));
+      this.nextElementSibling.classList.toggle('open', !exp);
+    });
+  }
+  document.querySelectorAll('.section-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const exp = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!exp));
+      this.nextElementSibling.classList.toggle('open', !exp);
+    });
+  });
+  document.querySelectorAll('.item-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const exp = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!exp));
+      this.nextElementSibling.classList.toggle('open', !exp);
+    });
+  });
+});
+</script>
+</body>
+</html>
